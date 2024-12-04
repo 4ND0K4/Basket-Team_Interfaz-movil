@@ -60,18 +60,25 @@ export const addPlayer = async (player: Player, imageFile: any, videoFile: any):
   };
 
 // Actualizar un jugador existente con archivos de imagen y video opcionales
-export const updatePlayer = async (id: string, player: Player, imageFile?: any, videoFile?: any): Promise<void> => {
-  // Subir archivos de imagen y video si se proporcionan y actualizar URLs
+export const updatePlayer = async (
+  id: string, 
+  player: Player, 
+  imageFile?: any, 
+  videoFile?: any
+): Promise<void> => {
+  // Subir nuevo archivo de imagen si se proporciona
   if (imageFile) {
     const imageUrl = await uploadFile(imageFile, `images/${player.nombre}-${Date.now()}`);
-    player.img = imageUrl;
-  }
-  if (videoFile) {
-    const videoUrl = await uploadFile(videoFile, `videos/${player.nombre}-${Date.now()}`);
-    player.video = videoUrl;
+    player.img = imageUrl; // Actualizar URL de imagen
   }
 
-  // Actualizar jugador en la base de datos
+  // Subir nuevo archivo de video si se proporciona
+  if (videoFile) {
+    const videoUrl = await uploadFile(videoFile, `videos/${player.nombre}-${Date.now()}`);
+    player.video = videoUrl; // Actualizar URL de video
+  }
+
+  // Actualizar los datos del jugador en la base de datos
   await database().ref(`${dbPath}/${id}`).update(player);
 };
 

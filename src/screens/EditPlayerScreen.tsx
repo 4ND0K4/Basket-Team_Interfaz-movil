@@ -60,7 +60,7 @@ export const EditPlayerScreen: React.FC = () => {
 
   const handleSubmit = async () => {
     if (!player) return;
-
+  
     const updatedPlayer: Player = {
       ...player,
       nombre,
@@ -70,16 +70,18 @@ export const EditPlayerScreen: React.FC = () => {
       anillos,
       descripcion,
     };
-
+  
     try {
-      await updatePlayer(player.id, updatedPlayer);
+      // Llamamos a la función updatePlayer pasándole los archivos de imagen y video si existen
+      await updatePlayer(player.id, updatedPlayer, imageFile, videoFile);
       Alert.alert('Player updated successfully!');
       navigation.navigate('Detail', { player: updatedPlayer });
     } catch (error) {
       console.error('Error updating player:', error);
-      Alert.alert('Error updating player');
+      Alert.alert('Error updating player.');
     }
   };
+  
 
   if (!player) {
     return (
