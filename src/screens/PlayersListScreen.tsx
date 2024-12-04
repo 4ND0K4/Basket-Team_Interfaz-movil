@@ -4,14 +4,15 @@ import { globalStyles } from '../styles/theme/global.styles';
 import { getPlayers } from '../services/playerService';
 import PlayerCard from '../components/PlayerCard';
 import { Player } from '../models/Player';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import NavigationButton from '../components/shared/NavigationButton';
+import { type RootStackParams } from '../routes/StackNavigator';
 
 
 
 export const PlayersListScreen = () => {
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
@@ -67,7 +68,7 @@ export const PlayersListScreen = () => {
     <View style={globalStyles.centerContainer}>
 
       <NavigationButton 
-        onPress={() => navigation.navigate('Create' as never)} 
+        onPress={() => navigation.navigate('Create')} 
         label="Crea jugador" 
         />
       {/*<Pressable 

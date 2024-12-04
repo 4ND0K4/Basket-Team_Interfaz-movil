@@ -43,6 +43,7 @@ export const globalStyles = StyleSheet.create({
         bottom: 15,
     },
     form: {
+        flex: 1,
         backgroundColor: 'orange', 
         padding: 100
     },

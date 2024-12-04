@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { View, Button, StyleSheet, TextInput, Alert } from 'react-native';
+import { View, Button, StyleSheet, TextInput, Alert, Text } from 'react-native';
 import { addPlayer } from '../services/playerService';
 import * as ImagePicker from 'react-native-image-picker';
 import { Player } from '../models/Player';
+import NavigationButton from '../components/shared/NavigationButton';
+import { useNavigation, type NavigationProp } from '@react-navigation/native';
+import { RootStackParams } from '../routes/StackNavigator';
 
 const CreatePlayerScreen = () => {
+
+  const navigation = useNavigation<NavigationProp<RootStackParams>>();
+
   const [nombre, setNombre] = useState('');
   const [posicion, setPosicion] = useState('');
   const [num, setNum] = useState('');
@@ -105,6 +111,12 @@ const CreatePlayerScreen = () => {
       <Button title="Elige una imagen" onPress={handleChooseImage} />
       <Button title="Elige un video" onPress={handleChooseVideo} />
       <Button title="Crear jugador" onPress={handleSubmit} />
+
+      
+      <NavigationButton 
+        onPress={ () => navigation.navigate('List' as never) }
+        label="Volver"
+        />
     </View>
   );
 };

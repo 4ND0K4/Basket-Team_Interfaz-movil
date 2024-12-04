@@ -1,8 +1,14 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, Image } from 'react-native';
 import { Player } from '../models/Player';
+import NavigationButton from './shared/NavigationButton';
+import { useNavigation, type NavigationProp } from '@react-navigation/native';
+import { RootStackParams } from '../routes/StackNavigator';
 
 const PlayerCard: React.FC<{ player: Player }> = ({ player }) => {
+
+  const navigation = useNavigation<NavigationProp<RootStackParams>>();
+
   return (
     <View style={styles.cardBody}>
         <Image source={{ uri: player.img }} style={styles.cardImage} />
@@ -22,11 +28,9 @@ const PlayerCard: React.FC<{ player: Player }> = ({ player }) => {
           <Text style={styles.boldText}>Anillos NBA:</Text> Ninguno
         </Text>
       )}
-      <View style={styles.buttonContainer}>
-        <Button title="Ver Detalle" color="#007bff" />
+        <Button title="Ver Detalle" color="#007bff" onPress={() => navigation.navigate('Detail', { player })} />
         <Button title="Eliminar" color="#dc3545" />
       </View>
-    </View>
   );
 };
 
