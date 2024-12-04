@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Pressable } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { globalStyles } from '../styles/theme/global.styles';
 import { getPlayers } from '../services/playerService';
 import PlayerCard from '../components/PlayerCard';
 import { Player } from '../models/Player';
-import { useNavigation, type NavigationProp } from '@react-navigation/native';
+import { useNavigation, useRoute, type NavigationProp, RouteProp } from '@react-navigation/native';
 import { type RootStackParams } from '../routes/StackNavigator';
 import CreationButton from '../components/shared/CreationButton';
 
-
+type PlayersListScreenRouteProp = RouteProp<RootStackParams, 'List'>;
 
 export const PlayersListScreen = () => {
-
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  const route = useRoute<PlayersListScreenRouteProp>();
 
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +37,12 @@ export const PlayersListScreen = () => {
     fetchPlayers();
   }, []);
 
+  useEffect(() => {
+    if (route.params?.newPlayer) {
+      setPlayers(prevPlayers => [route.params.newPlayer, ...prevPlayers]);
+    }
+  }, [route.params?.newPlayer]);
+
   const fetchMorePlayers = async () => {
     if (isFetchingMore || !lastKey) return;
     setIsFetchingMore(true);
@@ -56,6 +62,10 @@ export const PlayersListScreen = () => {
     }
   };
 
+  const handleDeletePlayer = (id: string) => {
+    setPlayers(prevPlayers => prevPlayers.filter(player => player.id !== id));
+  };
+
   if (loading) {
     return (
       <View style={globalStyles.centerContainer}>
@@ -66,22 +76,17 @@ export const PlayersListScreen = () => {
 
   return (
     <View style={globalStyles.centerContainer}>
-
-      <CreationButton 
-        onPress={() => navigation.navigate('Create')} 
-        label="Crea jugador" 
-        />
+      <CreationButton onPress={() => navigation.navigate('Create')} label="Crea jugador" />
       <Text style={globalStyles.title}>Lista de jugadores</Text>
       <FlatList
         data={players}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <PlayerCard player={item} />}
+        renderItem={({ item }) => <PlayerCard player={item} onDelete={handleDeletePlayer} />}
         onEndReachedThreshold={0.5}
         onEndReached={fetchMorePlayers}
       />
     </View>
   );
-
 };
 
 export default PlayersListScreen;

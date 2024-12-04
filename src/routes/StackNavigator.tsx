@@ -6,7 +6,7 @@ import EditPlayerScreen from '../screens/EditPlayerScreen';
 import { Player } from '../models/Player';
 
 export type RootStackParams = {
-    List: undefined;
+    List: { newPlayer?: Player };
     Create: undefined;
     Detail: { player: Player };
     Edit: { playerId: string };

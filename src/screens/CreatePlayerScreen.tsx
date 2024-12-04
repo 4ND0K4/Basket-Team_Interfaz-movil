@@ -9,7 +9,6 @@ import { RootStackParams } from '../routes/StackNavigator';
 import { globalStyles } from '../styles/theme/global.styles';
 
 const CreatePlayerScreen = () => {
-
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
   const [nombre, setNombre] = useState('');
@@ -62,6 +61,7 @@ const CreatePlayerScreen = () => {
       setImageFile(null);
       setVideoFile(null);
       Alert.alert('Player added successfully!');
+      navigation.navigate('List', { newPlayer: player });
     } catch (error) {
       console.error('Error adding player:', error);
       Alert.alert('Error adding player');
@@ -113,12 +113,10 @@ const CreatePlayerScreen = () => {
       <Button title="Elige una imagen" onPress={handleChooseImage} />
       <Button title="Elige un video" onPress={handleChooseVideo} />
       <Button title="Crear jugador" onPress={handleSubmit} />
-
-      
       <NavigationButton 
         onPress={ () => navigation.navigate('List' as never) }
         label="Volver"
-        />
+      />
     </View>
   );
 };

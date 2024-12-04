@@ -1,18 +1,31 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Image } from 'react-native';
+import { View, Text, Button, Image } from 'react-native';
 import { Player } from '../models/Player';
-import NavigationButton from './shared/NavigationButton';
 import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import { RootStackParams } from '../routes/StackNavigator';
 import { globalStyles } from '../styles/theme/global.styles';
+import { deletePlayer } from '../services/playerService';
 
-const PlayerCard: React.FC<{ player: Player }> = ({ player }) => {
+type PlayerCardProps = {
+  player: Player;
+  onDelete: (id: string) => void;
+};
 
+const PlayerCard: React.FC<PlayerCardProps> = ({ player, onDelete }) => {
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
+
+  const handleDelete = async () => {
+    try {
+      await deletePlayer(player.id);
+      onDelete(player.id);
+    } catch (error) {
+      console.error('Error deleting player:', error);
+    }
+  };
 
   return (
     <View style={globalStyles.cardBody}>
-        <Image source={{ uri: player.img }} style={globalStyles.cardImage} />
+      <Image source={{ uri: player.img }} style={globalStyles.cardImage} />
       <Text style={globalStyles.cardTitle}>{player.nombre}</Text>
       <Text style={globalStyles.cardText}>
         <Text style={globalStyles.boldText}>Posición:</Text> {player.posicion}
@@ -31,11 +44,10 @@ const PlayerCard: React.FC<{ player: Player }> = ({ player }) => {
       )}
       <View style={globalStyles.buttonContainer}>
         <Button title="Ver Detalle" color="#007bff" onPress={() => navigation.navigate('Detail', { player })} />
-        <Button title="Eliminar" color="#dc3545" />
-        </View>
+        <Button title="Eliminar" color="#dc3545" onPress={handleDelete} />
       </View>
+    </View>
   );
 };
-
 
 export default PlayerCard;
