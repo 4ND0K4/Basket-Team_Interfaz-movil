@@ -12,11 +12,16 @@ export const globalColors = {
 }
 
 export const globalStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: globalColors.secondary
+    },
     centerContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: globalColors.primary
+        backgroundColor: globalColors.terciary
     },
     title: {
         fontSize: 40,
@@ -41,13 +46,22 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: 'orange', 
         padding: 100
     },
-    container: {
-        flex: 1,
-        padding: 10,
-    },
+    
     addButton: {
         position: 'absolute',
         right: 20,
         bottom: 20,
     },
+    navigationButton: {
+        backgroundColor: globalColors.primary,
+        padding: 10,
+        borderRadius: 5,
+        margin: 10,
+        width: '100%',
+        alignItems: 'center'
+    },
+    buttonText: {
+        color: globalColors.light,
+        fontSize: 20
+    }
 });

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Pressable } from 'react-native';
 import { globalStyles } from '../styles/theme/global.styles';
 import { getPlayers } from '../services/playerService';
 import PlayerCard from '../components/PlayerCard';
 import { Player } from '../models/Player';
+import { useNavigation } from '@react-navigation/native';
+import NavigationButton from '../components/shared/NavigationButton';
 
 
 
 export const PlayersListScreen = () => {
 
+  const navigation = useNavigation();
 
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
@@ -62,6 +65,17 @@ export const PlayersListScreen = () => {
 
   return (
     <View style={globalStyles.centerContainer}>
+
+      <NavigationButton 
+        onPress={() => navigation.navigate('Create' as never)} 
+        label="Crea jugador" 
+        />
+      {/*<Pressable 
+        onPress={() => navigation.navigate('Create' as never)}
+        style={globalStyles.navigationButton}>
+        <Text style={globalStyles.buttonText}>Add Player</Text>
+      </Pressable>*/}
+
       <Text style={globalStyles.title}>Players List</Text>
       <FlatList
         data={players}
