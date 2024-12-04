@@ -11,7 +11,7 @@ import StackNavigator from './src/routes/StackNavigator';
 export const App = () => {
   return (
     <NavigationContainer>
-        {/*<Navbar />*/}
+        <Navbar />
         {/*<PlayerListScreen /> */}
         {/*<CreatePlayerScreen />*/}
         <StackNavigator />

@@ -1,10 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { globalStyles } from '../../styles/theme/global.styles';
+import { useNavigation, StackActions } from '@react-navigation/native';
 
 export const Navbar = () => {
 
+    const navigator = useNavigation();
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>
+        <View style={globalStyles.navBarContainer}>
+            <Text 
+                onPress={ () => navigator.dispatch( StackActions.popToTop ) }
+                style={globalStyles.navBarTitle}>
                 Movicoders Basket Team
             </Text>
         </View>
@@ -13,17 +19,3 @@ export const Navbar = () => {
 
 export default Navbar;
 
-const styles = StyleSheet.create({
-    container: {
-        height: 50,
-        backgroundColor: 'blue', 
-    },
-    title: {
-        fontSize: 18,
-        color: 'orange',
-        paddingHorizontal: 100,
-        paddingVertical: 10,
-        
-    },
-    
-});

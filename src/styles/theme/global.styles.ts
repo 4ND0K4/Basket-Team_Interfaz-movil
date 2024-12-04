@@ -64,5 +64,16 @@ export const globalStyles = StyleSheet.create({
     buttonText: {
         color: globalColors.light,
         fontSize: 20
-    }
+    },
+    navBarContainer: {
+        height: 50,
+        backgroundColor: 'blue', 
+    },
+    navBarTitle: {
+        fontSize: 18,
+        color: 'orange',
+        paddingHorizontal: 100,
+        paddingVertical: 10,
+        
+    },
 });

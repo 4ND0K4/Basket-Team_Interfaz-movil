@@ -36,7 +36,7 @@ export const DetailPlayerScreen: React.FC = () => {
             <Text style={styles.text}><Text style={styles.boldText}>Descripción:</Text> {player.descripcion}</Text>
             <View style={styles.buttonContainer}>
                 <Button title="Reproducir Video" onPress={() => { /* Lógica para reproducir video */ }} />
-                <Button title="Editar" onPress={() => { /* Lógica para editar jugador */ }} />
+                <Button title="Editar" onPress={() => navigation.navigate('Edit', { playerId: player.id })} />
                 <NavigationButton 
                     onPress={ () => navigation.navigate('List') }
                     label="Volver"
