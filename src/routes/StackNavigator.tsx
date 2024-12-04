@@ -3,6 +3,7 @@ import PlayersListScreen from '../screens/PlayersListScreen';
 import CreatePlayerScreen from '../screens/CreatePlayerScreen';
 import DetailPlayerScreen from '../screens/DetailPlayerScreen';
 import EditPlayerScreen from '../screens/EditPlayerScreen';
+import MediaScreen from '../screens/MediaScreen';
 import { Player } from '../models/Player';
 
 export type RootStackParams = {
@@ -10,6 +11,7 @@ export type RootStackParams = {
     Create: undefined;
     Detail: { player: Player };
     Edit: { playerId: string };
+    Media: undefined;
 }
 
 
@@ -34,6 +36,7 @@ export const StackNavigator = () => {
       <Stack.Screen name="Create" component={CreatePlayerScreen} />
       <Stack.Screen name="Detail" component={DetailPlayerScreen} />
       <Stack.Screen name="Edit" component={EditPlayerScreen} />
+      <Stack.Screen name="Media" component={MediaScreen} />
     </Stack.Navigator>
   );
 }

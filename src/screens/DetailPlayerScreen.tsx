@@ -34,8 +34,10 @@ export const DetailPlayerScreen: React.FC = () => {
             <View style={globalStyles.buttonContainer}>
                 <Button 
                   title="Reproducir Video" 
-                  onPress={() => { /* Lógica para reproducir video */ }} />
-                <Button title="Editar" onPress={() => navigation.navigate('Edit', { playerId: player.id })} />
+                  onPress={() => navigation.navigate('Media') } />
+                <Button  
+                  title="Editar" 
+                  onPress={() => navigation.navigate('Edit', { playerId: player.id })} />
                 
             </View>
             <NavigationButton 
