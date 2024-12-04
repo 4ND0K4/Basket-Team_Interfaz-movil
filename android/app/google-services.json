@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "869836237509",
+    "firebase_url": "https://movicoders-basketproject-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "movicoders-basketproject",
+    "storage_bucket": "movicoders-basketproject.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869836237509:android:8f20d542f0fa009564deac",
+        "android_client_info": {
+          "package_name": "com.basketteam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6wfgYd4esehVHfGKWQOfRgmgMzcGIkZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
