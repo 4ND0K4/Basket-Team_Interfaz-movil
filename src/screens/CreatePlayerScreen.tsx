@@ -64,50 +64,41 @@ const CreatePlayerScreen = () => {
   return (
     <View style={styles.container}>
       <TextInput
-        label="Nombre"
         placeholder="Nombre"
-        mode="outlined"
-        keyboardType="default"
+        style={styles.input}
         value={nombre}
         onChangeText={text => setNombre(text)}
       />
       <TextInput
-        mode="outlined"
-        label="Posicion"
         placeholder="Posicion"
-        keyboardType="default"
+        style={styles.input}
         value={posicion}
         onChangeText={text => setPosicion(text)}
       />
       <TextInput
-        label="Numero"
         placeholder="Numero"
-        mode="outlined"
+        style={styles.input}
         keyboardType="numeric"
         value={num}
         onChangeText={text => setNum(text)}
       />
       <TextInput
-        label="Edad"
         placeholder="Edad"
-        mode="outlined"
+        style={styles.input}
         keyboardType="numeric"
         value={edad}
         onChangeText={text => setEdad(text)}
       />
       <TextInput
-        label="Anillos"
         placeholder="Anillos"
-        mode="outlined"
+        style={styles.input}
         keyboardType="numeric"
         value={anillos}
         onChangeText={text => setAnillos(text)}
       />
       <TextInput
-        label="Descripcion"
         placeholder="Descripcion"
-        mode="outlined"
-        keyboardType="default"
+        style={styles.input}
         value={descripcion}
         onChangeText={text => setDescripcion(text)}
       />
@@ -122,6 +113,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingLeft: 8,
   },
 });
 
