@@ -21,8 +21,14 @@ export const StackNavigator = () => {
         headerShown: true,
         headerStyle: {
             elevation: 10,
-            shadowColor: 'transparent'
-        }
+            shadowColor: 'transparent',
+            backgroundColor: '#f8f9fa' // Color de fondo del título
+        },
+        headerTintColor: '#1565C0', // Color del texto y los íconos
+        headerTitleStyle: {
+          fontWeight: 'bold', // Estilo del texto del título
+          
+        },
     }}>
       <Stack.Screen name="List" component={PlayersListScreen} />
       <Stack.Screen name="Create" component={CreatePlayerScreen} />

@@ -6,6 +6,7 @@ import { Player } from '../models/Player';
 import NavigationButton from '../components/shared/NavigationButton';
 import { useNavigation, useRoute, type NavigationProp, RouteProp } from '@react-navigation/native';
 import { RootStackParams } from '../routes/StackNavigator';
+import { globalStyles } from '../styles/theme/global.styles';
 
 type EditPlayerScreenRouteProp = RouteProp<RootStackParams, 'Edit'>;
 
@@ -82,50 +83,51 @@ export const EditPlayerScreen: React.FC = () => {
 
   if (!player) {
     return (
-      <View style={styles.container}>
+      <View style={globalStyles.container}>
         <Text>Loading...</Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.form}>
+      <Text style={globalStyles.formTitle}>Editar jugador</Text>
       <TextInput
         placeholder="Nombre"
-        style={styles.input}
+        style={globalStyles.formInput}
         value={nombre}
         onChangeText={text => setNombre(text)}
       />
       <TextInput
         placeholder="Posicion"
-        style={styles.input}
+        style={globalStyles.formInput}
         value={posicion}
         onChangeText={text => setPosicion(text)}
       />
       <TextInput
         placeholder="Numero"
-        style={styles.input}
+        style={globalStyles.formInput}
         keyboardType="numeric"
         value={num}
         onChangeText={text => setNum(text)}
       />
       <TextInput
         placeholder="Edad"
-        style={styles.input}
+        style={globalStyles.formInput}
         keyboardType="numeric"
         value={edad}
         onChangeText={text => setEdad(text)}
       />
       <TextInput
         placeholder="Anillos"
-        style={styles.input}
+        style={globalStyles.formInput}
         keyboardType="numeric"
         value={anillos}
         onChangeText={text => setAnillos(text)}
       />
       <TextInput
         placeholder="Descripcion"
-        style={styles.input}
+        style={globalStyles.formInput}
         value={descripcion}
         onChangeText={text => setDescripcion(text)}
       />
@@ -139,19 +141,5 @@ export const EditPlayerScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingLeft: 8,
-  },
-});
 
 export default EditPlayerScreen;

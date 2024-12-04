@@ -6,6 +6,7 @@ import { Player } from '../models/Player';
 import { useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { RouteProp } from '@react-navigation/native';
+import { globalStyles } from '../styles/theme/global.styles';
 
 type DetailPlayerScreenRouteProp = RouteProp<RootStackParams, 'Detail'>;
 
@@ -22,60 +23,27 @@ export const DetailPlayerScreen: React.FC = () => {
       }, [player]);
 
     return (  
-        <View style={styles.container}>
-            <Text>Detail Player Screen</Text>
-            <Text>
-                { player.id } - { player.nombre }
-            </Text>
-            <Image source={{ uri: player.img }} style={styles.image} />
-            <Text style={styles.title}>{player.nombre}</Text>
-            <Text style={styles.text}><Text style={styles.boldText}>Posición:</Text> {player.posicion}</Text>
-            <Text style={styles.text}><Text style={styles.boldText}>Número:</Text> {player.num}</Text>
-            <Text style={styles.text}><Text style={styles.boldText}>Edad:</Text> {player.edad}</Text>
-            <Text style={styles.text}><Text style={styles.boldText}>Anillos:</Text> {player.anillos}</Text>
-            <Text style={styles.text}><Text style={styles.boldText}>Descripción:</Text> {player.descripcion}</Text>
-            <View style={styles.buttonContainer}>
-                <Button title="Reproducir Video" onPress={() => { /* Lógica para reproducir video */ }} />
+        <View style={globalStyles.container}>
+            <Image source={{ uri: player.img }} style={globalStyles.detailImage} />
+            <Text style={globalStyles.detailTitle}>{player.nombre}</Text>
+            <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Posición:</Text> {player.posicion}</Text>
+            <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Número:</Text> {player.num}</Text>
+            <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Edad:</Text> {player.edad}</Text>
+            <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Anillos:</Text> {player.anillos}</Text>
+            <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Descripción:</Text> {player.descripcion}</Text>
+            <View style={globalStyles.buttonContainer}>
+                <Button 
+                  title="Reproducir Video" 
+                  onPress={() => { /* Lógica para reproducir video */ }} />
                 <Button title="Editar" onPress={() => navigation.navigate('Edit', { playerId: player.id })} />
-                <NavigationButton 
+                
+            </View>
+            <NavigationButton 
                     onPress={ () => navigation.navigate('List') }
                     label="Volver"
                 />
-            </View>
         </View>
     );
 };
 
 export default DetailPlayerScreen;
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 20,
-      backgroundColor: 'white',
-    },
-    image: {
-      width: '100%',
-      height: 200,
-      resizeMode: 'cover',
-      marginBottom: 20,
-    },
-    title: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      textAlign: 'center',
-      marginBottom: 10,
-    },
-    text: {
-      fontSize: 16,
-      marginVertical: 5,
-    },
-    boldText: {
-      fontWeight: 'bold',
-    },
-    buttonContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginTop: 20,
-    },
-  });

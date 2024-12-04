@@ -5,8 +5,8 @@ import { getPlayers } from '../services/playerService';
 import PlayerCard from '../components/PlayerCard';
 import { Player } from '../models/Player';
 import { useNavigation, type NavigationProp } from '@react-navigation/native';
-import NavigationButton from '../components/shared/NavigationButton';
 import { type RootStackParams } from '../routes/StackNavigator';
+import CreationButton from '../components/shared/CreationButton';
 
 
 
@@ -67,17 +67,11 @@ export const PlayersListScreen = () => {
   return (
     <View style={globalStyles.centerContainer}>
 
-      <NavigationButton 
+      <CreationButton 
         onPress={() => navigation.navigate('Create')} 
         label="Crea jugador" 
         />
-      {/*<Pressable 
-        onPress={() => navigation.navigate('Create' as never)}
-        style={globalStyles.navigationButton}>
-        <Text style={globalStyles.buttonText}>Add Player</Text>
-      </Pressable>*/}
-
-      <Text style={globalStyles.title}>Players List</Text>
+      <Text style={globalStyles.title}>Lista de jugadores</Text>
       <FlatList
         data={players}
         keyExtractor={(item) => item.id}
