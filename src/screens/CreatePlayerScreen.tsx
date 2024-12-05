@@ -71,9 +71,10 @@ const CreatePlayerScreen = () => {
 
   return (
     <View style={globalStyles.form}>
-      <Text style={globalStyles.formTitle}>Introduce los datos</Text>
+      <Text style={globalStyles.formTitle}>Crear jugador</Text>
       <TextInput
         placeholder="Nombre"
+        autoCapitalize='words'
         style={globalStyles.formInput}
         value={nombre}
         onChangeText={text => setNombre(text)}
@@ -109,6 +110,7 @@ const CreatePlayerScreen = () => {
         placeholder="Descripcion"
         style={globalStyles.formInput}
         value={descripcion}
+        numberOfLines={4}
         onChangeText={text => setDescripcion(text)}
       />
         <View style={globalStyles.buttonContainer}>
@@ -116,19 +118,20 @@ const CreatePlayerScreen = () => {
             name="image" 
             backgroundColor="#e65c00" 
             onPress={handleChooseImage}
-          >Elige una imagen</Icon.Button>
+          >Elige imagen</Icon.Button>
           <Icon.Button 
             name="video" 
             backgroundColor="#e65c00" 
             onPress={handleChooseVideo}
-          >Elige un video</Icon.Button>
+          >Elige video</Icon.Button>
         </View>
         <View style={globalStyles.formButtonSeparator} />
-      <Button style={globalStyles.formButton} title="Crear jugador" onPress={handleSubmit} />
-      <NavigationButton 
+      <Button title="Guardar cambios" onPress={handleSubmit} />
+      
+      {/*<NavigationButton 
         onPress={ () => navigation.navigate('List' as never) }
         label="Volver"
-      />
+      /> */}
     </View>
   );
 };

@@ -23,7 +23,7 @@ export const StackNavigator = () => {
         headerShown: true,
         headerStyle: {
             elevation: 10,
-            shadowColor: 'transparent',
+            shadowColor: '#e65c00',
             backgroundColor: '#f8f9fa' // Color de fondo del título
         },
         headerTintColor: '#1565C0', // Color del texto y los íconos

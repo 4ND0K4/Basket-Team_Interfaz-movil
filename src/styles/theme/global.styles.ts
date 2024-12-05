@@ -66,6 +66,12 @@ export const globalStyles = StyleSheet.create({
     formButtonSeparator: {
         height: 20
     },
+    label: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: 'black',
+        marginVertical: 5,
+    },
     // Estilo para los botones
     creationButton: {
         backgroundColor: globalColors.primary,
@@ -97,9 +103,15 @@ export const globalStyles = StyleSheet.create({
     },
     fab: {
         position: 'absolute',
-        margin: 16,
-        right: 0,
-        bottom: 15,
+        width: 56,
+        height: 56,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 16,
+        bottom: 16,
+        backgroundColor: '#03A9F4',
+        borderRadius: 28,
+        elevation: 8,
     },
     // Estilos para el navbar
     navBarContainer: {
@@ -110,7 +122,7 @@ export const globalStyles = StyleSheet.create({
     navBarTitle: {
         fontSize: 18,
         color: 'globalColors.secondary',
-        paddingHorizontal: 80,
+        paddingHorizontal: 60,
         paddingVertical: 10,
         fontWeight: 'bold', // Negrita para el título
     },

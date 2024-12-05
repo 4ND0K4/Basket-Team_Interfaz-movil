@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, StyleSheet, TextInput, Alert, Text } from 'react-native';
+import { View, Button, TextInput, Alert, Text } from 'react-native';
 import { updatePlayer, getPlayerById } from '../services/playerService';
 import * as ImagePicker from 'react-native-image-picker';
 import { Player } from '../models/Player';
@@ -94,19 +94,22 @@ export const EditPlayerScreen: React.FC = () => {
 
   return (
     <View style={globalStyles.form}>
-      <Text style={globalStyles.formTitle}>Editar jugador</Text>
+      <Text style={globalStyles.label}>Nombre:</Text>
       <TextInput
+        autoCapitalize='words'
         placeholder="Nombre"
         style={globalStyles.formInput}
         value={nombre}
         onChangeText={text => setNombre(text)}
       />
+      <Text style={globalStyles.label}>Posición:</Text>
       <TextInput
         placeholder="Posicion"
         style={globalStyles.formInput}
         value={posicion}
         onChangeText={text => setPosicion(text)}
       />
+      <Text style={globalStyles.label}>Número:</Text>
       <TextInput
         placeholder="Numero"
         style={globalStyles.formInput}
@@ -114,6 +117,7 @@ export const EditPlayerScreen: React.FC = () => {
         value={num}
         onChangeText={text => setNum(text)}
       />
+      <Text style={globalStyles.label}>Edad:</Text>
       <TextInput
         placeholder="Edad"
         style={globalStyles.formInput}
@@ -121,6 +125,7 @@ export const EditPlayerScreen: React.FC = () => {
         value={edad}
         onChangeText={text => setEdad(text)}
       />
+      <Text style={globalStyles.label}>Anillos:</Text>
       <TextInput
         placeholder="Anillos"
         style={globalStyles.formInput}
@@ -128,10 +133,14 @@ export const EditPlayerScreen: React.FC = () => {
         value={anillos}
         onChangeText={text => setAnillos(text)}
       />
+      <Text style={globalStyles.label}>Descripción:</Text>
       <TextInput
         placeholder="Descripcion"
+        
         style={globalStyles.formInput}
         value={descripcion}
+        
+        
         onChangeText={text => setDescripcion(text)}
       />
         <View style={globalStyles.buttonContainer}>
@@ -139,19 +148,20 @@ export const EditPlayerScreen: React.FC = () => {
             name="image" 
             backgroundColor="#e65c00"
             onPress={handleChooseImage}
-          >Elige una imagen</Icon.Button>
+          >Elige imagen</Icon.Button>
           <Icon.Button 
             name="video" 
             backgroundColor="#e65c00"
             onPress={handleChooseVideo}
-          >Elige un video</Icon.Button>
+          >Elige video</Icon.Button>
         </View>
         <View style={globalStyles.formButtonSeparator}></View>
-      <Button style={globalStyles.formButton} title="Actualizar jugador" onPress={handleSubmit} />
-      <NavigationButton 
+      <Button title="Actualizar jugador" onPress={handleSubmit} />
+      
+      {/*<NavigationButton 
         label="Volver"
         onPress={ () => navigation.navigate('List' as never) }
-      />
+      />*/}
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { globalStyles } from '../../styles/theme/global.styles';
 import { useNavigation, StackActions } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
