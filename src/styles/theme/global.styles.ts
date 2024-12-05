@@ -12,6 +12,7 @@ export const globalColors = {
 }
 
 export const globalStyles = StyleSheet.create({
+    // Estilos globales
     container: {
         backgroundColor: globalColors.light,
         padding: 20,
@@ -24,16 +25,20 @@ export const globalStyles = StyleSheet.create({
         padding: 20,
         ...StyleSheet.absoluteFillObject
     },
-    form: {
-        backgroundColor: globalColors.light, 
-        padding: 40,
-        ...StyleSheet.absoluteFillObject
-    },
     title: {
         fontSize: 40,
         fontWeight: '300',
         color: 'black',
         marginVertical: 10
+    },
+    boldText: {
+        fontWeight: 'bold',
+    },
+    // Estilos para formularios
+    form: {
+        backgroundColor: globalColors.light, 
+        padding: 40,
+        ...StyleSheet.absoluteFillObject
     },
     formTitle: {
         fontSize: 20,
@@ -41,12 +46,6 @@ export const globalStyles = StyleSheet.create({
         color: 'black',
         paddingBottom: 10,
         marginHorizontal: 40
-    },
-    detailTitle: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 10,
     },
     formInput: {
         height: 40,
@@ -56,12 +55,7 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 10,
         paddingLeft: 8,
     },
-    fab: {
-        position: 'absolute',
-        margin: 16,
-        right: 0,
-        bottom: 15,
-    },
+    // Estilo para los botones
     creationButton: {
         backgroundColor: globalColors.primary,
         padding: 10,
@@ -89,13 +83,13 @@ export const globalStyles = StyleSheet.create({
         color: globalColors.light,
         fontSize: 20
     },
-    detailText: {
-        fontSize: 16,
-        marginVertical: 5,
+    fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 15,
     },
-    boldText: {
-        fontWeight: 'bold',
-    },
+    // Estilos para el navbar
     navBarContainer: {
         height: 50, // Altura del navbar, ajusta según necesites
         justifyContent: 'center', // Centra el texto verticalmente
@@ -108,12 +102,7 @@ export const globalStyles = StyleSheet.create({
         paddingVertical: 10,
         fontWeight: 'bold', // Negrita para el título
     },
-    detailImage: {
-        width: '100%',
-        height: 250,
-        resizeMode: 'cover',
-        marginBottom: 20,
-    },
+    // Estilos para la  PlayerCard
     cardBody: {
         flex: 1,
         flexDirection: 'column',
@@ -134,4 +123,37 @@ export const globalStyles = StyleSheet.create({
         height: 200,
         resizeMode: 'cover',
     },
+    // Estilos para la pantalla de DetailPlayerScreen
+    detailTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 10,
+    },
+    detailImage: {
+        width: '100%',
+        height: 250,
+        resizeMode: 'cover',
+        marginBottom: 20,
+    },
+    detailText: {
+        fontSize: 16,
+        marginVertical: 5,
+    },
+    // Estilos para la pantalla de MediaScreen
+    mediaContainer: {
+        flex: 1,
+        backgroundColor: 'globalColors.secondary', 
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      videoContainer: {
+        width: '100%',
+        aspectRatio: 16 / 9,
+        backgroundColor: 'globalColors.secondary',
+      },
+      video: {
+        width: '100%',
+        height: '100%',
+      }
 });

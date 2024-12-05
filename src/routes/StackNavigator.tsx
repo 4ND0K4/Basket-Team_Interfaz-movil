@@ -7,11 +7,11 @@ import MediaScreen from '../screens/MediaScreen';
 import { Player } from '../models/Player';
 
 export type RootStackParams = {
-    List: { newPlayer?: Player };
+    List: { newPlayer?: Player};
     Create: undefined;
     Detail: { player: Player };
     Edit: { playerId: string };
-    Media: undefined;
+    Media: { videoUrl: string };
 }
 
 

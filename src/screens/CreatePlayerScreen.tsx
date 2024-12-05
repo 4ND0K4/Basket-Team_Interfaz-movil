@@ -5,7 +5,7 @@ import * as ImagePicker from 'react-native-image-picker';
 import { Player } from '../models/Player';
 import NavigationButton from '../components/shared/NavigationButton';
 import { useNavigation, type NavigationProp } from '@react-navigation/native';
-import { RootStackParams } from '../routes/StackNavigator';
+import { type RootStackParams } from '../routes/StackNavigator';
 import { globalStyles } from '../styles/theme/global.styles';
 
 const CreatePlayerScreen = () => {

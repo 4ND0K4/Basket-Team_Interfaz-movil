@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, Image, Button } from 'react-native';
 import { useNavigation, type NavigationProp } from '@react-navigation/native';
-import { RootStackParams } from '../routes/StackNavigator';
+import { type RootStackParams } from '../routes/StackNavigator';
 import NavigationButton from '../components/shared/NavigationButton';
 import { Player } from '../models/Player';
 import { useEffect } from 'react';
@@ -34,14 +34,14 @@ export const DetailPlayerScreen: React.FC = () => {
             <View style={globalStyles.buttonContainer}>
                 <Button 
                   title="Reproducir Video" 
-                  onPress={() => navigation.navigate('Media') } />
+                  onPress={() => navigation.navigate('Media', { videoUrl: player.video })} />
                 <Button  
                   title="Editar" 
                   onPress={() => navigation.navigate('Edit', { playerId: player.id })} />
                 
             </View>
             <NavigationButton 
-                    onPress={ () => navigation.navigate('List') }
+                    onPress={ () => navigation.navigate('List' as never) }
                     label="Volver"
                 />
         </View>
