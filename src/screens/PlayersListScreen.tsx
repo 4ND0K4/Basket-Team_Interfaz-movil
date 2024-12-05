@@ -66,6 +66,10 @@ export const PlayersListScreen = () => {
     setPlayers(prevPlayers => prevPlayers.filter(player => player.id !== id));
   };
 
+  const renderSeparator = () => {
+    return <View style={globalStyles.separator} />;
+  };
+
   if (loading) {
     return (
       <View style={globalStyles.centerContainer}>
@@ -81,6 +85,7 @@ export const PlayersListScreen = () => {
         data={players}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <PlayerCard player={item} onDelete={handleDeletePlayer} />}
+        ItemSeparatorComponent={renderSeparator}
         onEndReachedThreshold={0.5}
         onEndReached={fetchMorePlayers}
       />

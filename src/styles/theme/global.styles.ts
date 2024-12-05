@@ -123,6 +123,12 @@ export const globalStyles = StyleSheet.create({
         height: 200,
         resizeMode: 'cover',
     },
+    // Estilos para la pantalla de PlayerListScreen
+    separator: {
+        height: 5,
+        width: '100%',
+        backgroundColor: globalColors.light,
+      },
     // Estilos para la pantalla de DetailPlayerScreen
     detailTitle: {
         fontSize: 24,
