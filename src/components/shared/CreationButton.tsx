@@ -1,4 +1,4 @@
-import { Pressable, Text } from "react-native";
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { globalStyles } from "../../styles/theme/global.styles";
 
 
@@ -9,12 +9,28 @@ interface Props {
 
 export const CreationButton = ({ onPress, label }: Props) => {
   return (
-    <Pressable  
-        onPress={ () => onPress() }
-        style={globalStyles.creationButton}>
-      <Text style={ globalStyles.buttonText }>{label}</Text>
-    </Pressable>
+    <TouchableOpacity onPress={onPress} style={styles.fab}>
+      <Text style={styles.fabText}>{label}</Text>
+    </TouchableOpacity>
   );
 };
-
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    width: 56,
+    height: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 16,
+    bottom: 16,
+    backgroundColor: '#03A9F4',
+    borderRadius: 28,
+    elevation: 8,
+  },
+  fabText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
 export default CreationButton;

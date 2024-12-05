@@ -76,7 +76,6 @@ export const PlayersListScreen = () => {
 
   return (
     <View style={globalStyles.centerContainer}>
-      <CreationButton onPress={() => navigation.navigate('Create')} label="Crea jugador" />
       <Text style={globalStyles.title}>Lista de jugadores</Text>
       <FlatList
         data={players}
@@ -85,6 +84,7 @@ export const PlayersListScreen = () => {
         onEndReachedThreshold={0.5}
         onEndReached={fetchMorePlayers}
       />
+      <CreationButton onPress={() => navigation.navigate('Create')} label="+" />
     </View>
   );
 };
