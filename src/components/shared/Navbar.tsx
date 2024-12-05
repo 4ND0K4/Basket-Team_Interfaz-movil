@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { globalStyles } from '../../styles/theme/global.styles';
 import { useNavigation, StackActions } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome6';
 export const Navbar = () => {
     const navigator = useNavigation();
 
@@ -16,7 +16,7 @@ export const Navbar = () => {
             <Text 
                 onPress={() => navigator.dispatch(StackActions.popToTop())}
                 style={globalStyles.navBarTitle}>
-                <Icon name="rocket-outline" size={20} color="#900"></Icon>Movicoders Basket Team
+                <Icon name="basketball" size={18} color="#e65c00"></Icon> Movicoders Basket Team
             </Text>
         </LinearGradient>
     );

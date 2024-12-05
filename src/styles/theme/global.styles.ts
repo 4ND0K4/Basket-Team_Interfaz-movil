@@ -55,6 +55,17 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 10,
         paddingLeft: 8,
     },
+    formButton: {
+        backgroundColor: globalColors.primary,
+        padding: 10,
+        borderRadius: 5,
+        margin: 10,
+        width: '100%',
+        alignItems: 'center',
+    },
+    formButtonSeparator: {
+        height: 20
+    },
     // Estilo para los botones
     creationButton: {
         backgroundColor: globalColors.primary,
@@ -66,9 +77,10 @@ export const globalStyles = StyleSheet.create({
     },
     navigationButton: {
         backgroundColor: globalColors.primary,
-        padding: 10,
+        paddingHorizontal: 20,
+        paddingVertical: 5,
         borderRadius: 5,
-        margin: 10,
+        margin: 20,
         width: '100%',
         alignItems: 'center',
         position: 'absolute',
@@ -98,7 +110,7 @@ export const globalStyles = StyleSheet.create({
     navBarTitle: {
         fontSize: 18,
         color: 'globalColors.secondary',
-        paddingHorizontal: 100,
+        paddingHorizontal: 80,
         paddingVertical: 10,
         fontWeight: 'bold', // Negrita para el título
     },

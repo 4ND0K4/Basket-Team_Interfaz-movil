@@ -5,6 +5,7 @@ import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import { RootStackParams } from '../routes/StackNavigator';
 import { globalStyles } from '../styles/theme/global.styles';
 import { deletePlayer } from '../services/playerService';
+import Icon from 'react-native-vector-icons/FontAwesome6';
 
 type PlayerCardProps = {
   player: Player;
@@ -43,8 +44,16 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player, onDelete }) => {
         </Text>
       )}
       <View style={globalStyles.buttonContainer}>
-        <Button title="Ver Detalle" color="#007bff" onPress={() => navigation.navigate('Detail', { player })} />
-        <Button title="Eliminar" color="#dc3545" onPress={handleDelete} />
+        <Icon.Button 
+          name="eye" 
+          backgroundColor="#007bff" 
+          onPress={() => navigation.navigate('Detail', { player })}
+        >Detalle</Icon.Button>
+        <Icon.Button 
+          name="trash" 
+          backgroundColor="#dc3545" 
+          onPress={handleDelete} 
+        >Eliminar</Icon.Button>
       </View>
     </View>
   );

@@ -7,6 +7,7 @@ import NavigationButton from '../components/shared/NavigationButton';
 import { useNavigation, useRoute, type NavigationProp, RouteProp } from '@react-navigation/native';
 import { type RootStackParams } from '../routes/StackNavigator';
 import { globalStyles } from '../styles/theme/global.styles';
+import Icon from 'react-native-vector-icons/FontAwesome6';
 
 type EditPlayerScreenRouteProp = RouteProp<RootStackParams, 'Edit'>;
 
@@ -133,12 +134,23 @@ export const EditPlayerScreen: React.FC = () => {
         value={descripcion}
         onChangeText={text => setDescripcion(text)}
       />
-      <Button title="Elige una imagen" onPress={handleChooseImage} />
-      <Button title="Elige un video" onPress={handleChooseVideo} />
-      <Button title="Actualizar jugador" onPress={handleSubmit} />
+        <View style={globalStyles.buttonContainer}>
+          <Icon.Button 
+            name="image" 
+            backgroundColor="#e65c00"
+            onPress={handleChooseImage}
+          >Elige una imagen</Icon.Button>
+          <Icon.Button 
+            name="video" 
+            backgroundColor="#e65c00"
+            onPress={handleChooseVideo}
+          >Elige un video</Icon.Button>
+        </View>
+        <View style={globalStyles.formButtonSeparator}></View>
+      <Button style={globalStyles.formButton} title="Actualizar jugador" onPress={handleSubmit} />
       <NavigationButton 
-        onPress={ () => navigation.navigate('List' as never) }
         label="Volver"
+        onPress={ () => navigation.navigate('List' as never) }
       />
     </View>
   );

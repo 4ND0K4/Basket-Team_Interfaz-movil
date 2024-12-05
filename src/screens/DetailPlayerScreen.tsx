@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { RouteProp } from '@react-navigation/native';
 import { globalStyles } from '../styles/theme/global.styles';
+import Icon from 'react-native-vector-icons/FontAwesome6';
 
 type DetailPlayerScreenRouteProp = RouteProp<RootStackParams, 'Detail'>;
 
@@ -32,12 +33,16 @@ export const DetailPlayerScreen: React.FC = () => {
             <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Anillos:</Text> {player.anillos}</Text>
             <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Descripción:</Text> {player.descripcion}</Text>
             <View style={globalStyles.buttonContainer}>
-                <Button 
-                  title="Reproducir Video" 
-                  onPress={() => navigation.navigate('Media', { videoUrl: player.video })} />
-                <Button  
-                  title="Editar" 
-                  onPress={() => navigation.navigate('Edit', { playerId: player.id })} />
+                <Icon.Button 
+                  name="video" 
+                  backgroundColor="#007bff"
+                  onPress={() => navigation.navigate('Media', { videoUrl: player.video })} 
+                >Reproducir video</Icon.Button>
+                <Icon.Button  
+                  name="pen" 
+                  backgroundColor="#FFAB00"
+                  onPress={() => navigation.navigate('Edit', { playerId: player.id })} 
+                >Editar</Icon.Button>
                 
             </View>
             <NavigationButton 

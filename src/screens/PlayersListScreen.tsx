@@ -80,7 +80,7 @@ export const PlayersListScreen = () => {
 
   return (
     <View style={globalStyles.centerContainer}>
-      <Text style={globalStyles.title}>Lista de jugadores</Text>
+      {/*<Text style={globalStyles.title}>Lista de jugadores</Text>*/}
       <FlatList
         data={players}
         keyExtractor={(item) => item.id}
