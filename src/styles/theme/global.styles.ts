@@ -163,8 +163,8 @@ export const globalStyles = StyleSheet.create({
     detailImage: {
         width: '100%',
         height: 250,
-        resizeMode: 'cover',
-        marginBottom: 20,
+        marginBottom: 10,
+        resizeMode: 'contain',
     },
     detailText: {
         fontSize: 16,

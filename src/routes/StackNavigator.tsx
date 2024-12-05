@@ -29,8 +29,8 @@ export const StackNavigator = () => {
         headerTintColor: '#1565C0', // Color del texto y los íconos
         headerTitleStyle: {
           fontWeight: 'bold', // Estilo del texto del título
-          
         },
+        headerTitleAlign: 'center',
     }}>
       <Stack.Screen name="List" component={PlayersListScreen} />
       <Stack.Screen name="Create" component={CreatePlayerScreen} />
