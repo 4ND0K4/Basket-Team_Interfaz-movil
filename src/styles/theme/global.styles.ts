@@ -55,6 +55,15 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 10,
         paddingLeft: 8,
     },
+    pickerInput: {
+        borderWidth: 1,
+        borderColor: 'white',
+        backgroundColor: 'white',
+        marginBottom: 10,
+        paddingLeft: 8,
+        borderRadius: 5,
+        color: '#666666',
+    },
     formButton: {
         backgroundColor: globalColors.primary,
         padding: 10,

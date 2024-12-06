@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, TextInput, Alert, Text } from 'react-native';
-import { updatePlayer, getPlayerById } from '../services/playerService';
+import { View, Button, TextInput, Alert, Text, ActivityIndicator } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'react-native-image-picker';
-import { Player } from '../models/Player';
-import NavigationButton from '../components/shared/NavigationButton';
+//Navigation
 import { useNavigation, useRoute, type NavigationProp, RouteProp } from '@react-navigation/native';
 import { type RootStackParams } from '../routes/StackNavigator';
+//Styles
 import { globalStyles } from '../styles/theme/global.styles';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+//Models & Services
+import { Player } from '../models/Player';
+import { updatePlayer, getPlayerById } from '../services/playerService';
 
 type EditPlayerScreenRouteProp = RouteProp<RootStackParams, 'Edit'>;
 
@@ -15,6 +18,8 @@ export const EditPlayerScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
   const route = useRoute<EditPlayerScreenRouteProp>();
   const { playerId } = route.params;
+
+  const [loading, setLoading] = useState(false);
 
   const [player, setPlayer] = useState<Player | null>(null);
   const [nombre, setNombre] = useState('');
@@ -71,23 +76,26 @@ export const EditPlayerScreen: React.FC = () => {
       anillos,
       descripcion,
     };
-  
+
+    setLoading(true);
+
     try {
       // Llamamos a la función updatePlayer pasándole los archivos de imagen y video si existen
       await updatePlayer(player.id, updatedPlayer, imageFile, videoFile);
       Alert.alert('Player updated successfully!');
       navigation.navigate('Detail', { player: updatedPlayer });
     } catch (error) {
-      console.error('Error updating player:', error);
-      Alert.alert('Error updating player.');
+      console.error('Error al actualizar el jugador:', error);
+      Alert.alert('Error al actualizar el jugador.');
+    } finally {
+      setLoading(false);
     }
   };
   
-
   if (!player) {
     return (
       <View style={globalStyles.container}>
-        <Text>Loading...</Text>
+        <Text>Cargando...</Text>
       </View>
     );
   }
@@ -103,12 +111,17 @@ export const EditPlayerScreen: React.FC = () => {
         onChangeText={text => setNombre(text)}
       />
       <Text style={globalStyles.label}>Posición:</Text>
-      <TextInput
-        placeholder="Posicion"
-        style={globalStyles.formInput}
-        value={posicion}
-        onChangeText={text => setPosicion(text)}
-      />
+      <Picker
+        selectedValue={posicion}
+        style={globalStyles.pickerInput}
+        onValueChange={(posicion) => setPosicion(posicion)}
+      >
+        <Picker.Item label="Base" value="Base" />
+        <Picker.Item label="Escolta" value="Escolta" />
+        <Picker.Item label="Alero" value="Alero" />
+        <Picker.Item label="Ala-Pivot" value="Ala-Pivot" />
+        <Picker.Item label="Pivot" value="Pivot" />
+      </Picker>
       <Text style={globalStyles.label}>Número:</Text>
       <TextInput
         placeholder="Numero"
@@ -156,12 +169,11 @@ export const EditPlayerScreen: React.FC = () => {
           >Elige video</Icon.Button>
         </View>
         <View style={globalStyles.formButtonSeparator}></View>
+      {loading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
       <Button title="Actualizar jugador" onPress={handleSubmit} />
-      
-      {/*<NavigationButton 
-        label="Volver"
-        onPress={ () => navigation.navigate('List' as never) }
-      />*/}
+    )}
     </View>
   );
 };

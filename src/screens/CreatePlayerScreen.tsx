@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
-import { View, Button, StyleSheet, TextInput, Alert, Text } from 'react-native';
-import { addPlayer } from '../services/playerService';
+import { View, Button, StyleSheet, TextInput, Alert, Text, ActivityIndicator } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'react-native-image-picker';
-import { Player } from '../models/Player';
-import NavigationButton from '../components/shared/NavigationButton';
+//Navigation
 import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import { type RootStackParams } from '../routes/StackNavigator';
+//Styles
 import { globalStyles } from '../styles/theme/global.styles';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+//Models & Services
+import { Player } from '../models/Player';
+import { addPlayer } from '../services/playerService';
 
 const CreatePlayerScreen = () => {
+
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  
+  const [loading, setLoading] = useState(false);
 
   const [nombre, setNombre] = useState('');
-  const [posicion, setPosicion] = useState('');
+  const [posicion, setPosicion] = useState('Base');
   const [num, setNum] = useState('');
   const [edad, setEdad] = useState('');
   const [anillos, setAnillos] = useState('');
@@ -49,7 +55,7 @@ const CreatePlayerScreen = () => {
       img: '',
       video: ''
     };
-
+    setLoading(true);
     try {
       await addPlayer(player, imageFile, videoFile);
       // Reset form
@@ -61,17 +67,19 @@ const CreatePlayerScreen = () => {
       setDescripcion('');
       setImageFile(null);
       setVideoFile(null);
-      Alert.alert('Player added successfully!');
+      Alert.alert('¡Jugador creado correctamente!');
       navigation.navigate('List', { newPlayer: player });
     } catch (error) {
-      console.error('Error adding player:', error);
-      Alert.alert('Error adding player');
+      console.error('Error al añadir el jugador:', error);
+      Alert.alert('Error al añadir el jugador');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <View style={globalStyles.form}>
-      <Text style={globalStyles.formTitle}>Crear jugador</Text>
+      {/*<Text style={globalStyles.title}>Añadir jugador</Text>*/}
       <TextInput
         placeholder="Nombre"
         autoCapitalize='words'
@@ -79,14 +87,19 @@ const CreatePlayerScreen = () => {
         value={nombre}
         onChangeText={text => setNombre(text)}
       />
+      <Picker
+        selectedValue={posicion}
+        style={globalStyles.pickerInput}
+        onValueChange={(posicion) => setPosicion(posicion)}
+      >
+        <Picker.Item label="Base" value="Base" />
+        <Picker.Item label="Escolta" value="Escolta" />
+        <Picker.Item label="Alero" value="Alero" />
+        <Picker.Item label="Ala-Pivot" value="Ala-Pivot" />
+        <Picker.Item label="Pivot" value="Pivot" />
+      </Picker>
       <TextInput
-        placeholder="Posicion"
-        style={globalStyles.formInput}
-        value={posicion}
-        onChangeText={text => setPosicion(text)}
-      />
-      <TextInput
-        placeholder="Numero"
+        placeholder="Número"
         style={globalStyles.formInput}
         keyboardType="numeric"
         value={num}
@@ -107,7 +120,7 @@ const CreatePlayerScreen = () => {
         onChangeText={text => setAnillos(text)}
       />
       <TextInput
-        placeholder="Descripcion"
+        placeholder="Descripción"
         style={globalStyles.formInput}
         value={descripcion}
         numberOfLines={4}
@@ -126,12 +139,11 @@ const CreatePlayerScreen = () => {
           >Elige video</Icon.Button>
         </View>
         <View style={globalStyles.formButtonSeparator} />
+        {loading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
       <Button title="Guardar cambios" onPress={handleSubmit} />
-      
-      {/*<NavigationButton 
-        onPress={ () => navigation.navigate('List' as never) }
-        label="Volver"
-      /> */}
+    )}
     </View>
   );
 };

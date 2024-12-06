@@ -53,10 +53,11 @@ export const DetailPlayerScreen: React.FC = () => {
                   onPress={() => navigation.navigate('Edit', { playerId: player.id })} 
                 >Editar</Icon.Button>
             </View>
-            <NavigationButton 
+            {/* Botón de navegación a List. Componente sustituido por House */}
+            {/*<NavigationButton 
                 onPress={ () => navigation.navigate('List' as never) }
                 label="Volver"
-            />
+            />*/}
             <Modal visible={isModalVisible} transparent={true}>
                 <ImageViewer imageUrls={images} onClick={() => setIsModalVisible(false)} />
             </Modal>

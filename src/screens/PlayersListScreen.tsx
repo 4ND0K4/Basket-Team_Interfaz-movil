@@ -73,7 +73,7 @@ export const PlayersListScreen = () => {
   if (loading) {
     return (
       <View style={globalStyles.centerContainer}>
-        <Text style={globalStyles.title}>Loading...</Text>
+        <Text style={globalStyles.title}>Cargando...</Text>
       </View>
     );
   }
@@ -89,7 +89,7 @@ export const PlayersListScreen = () => {
         onEndReachedThreshold={0.5}
         onEndReached={fetchMorePlayers}
       />
-      <CreationButton onPress={() => navigation.navigate('Create')} label="+" />
+      <CreationButton onPress={() => navigation.navigate('Create')} label="" />
     </View>
   );
 };
