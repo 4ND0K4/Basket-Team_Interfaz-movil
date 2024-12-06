@@ -149,11 +149,10 @@ export const EditPlayerScreen: React.FC = () => {
       <Text style={globalStyles.label}>Descripción:</Text>
       <TextInput
         placeholder="Descripcion"
-        
-        style={globalStyles.formInput}
+        style={[globalStyles.formInput, { height: 100 }]}
+        multiline={true}
+        numberOfLines={4}
         value={descripcion}
-        
-        
         onChangeText={text => setDescripcion(text)}
       />
         <View style={globalStyles.buttonContainer}>

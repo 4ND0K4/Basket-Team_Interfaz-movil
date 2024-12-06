@@ -40,7 +40,7 @@ export const DetailPlayerScreen: React.FC = () => {
             <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Número:</Text> {player.num}</Text>
             <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Edad:</Text> {player.edad}</Text>
             <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Anillos:</Text> {player.anillos}</Text>
-            <Text style={globalStyles.detailText}><Text style={globalStyles.boldText}>Descripción:</Text> {player.descripcion}</Text>
+            <Text style={globalStyles.detailText} numberOfLines={5}><Text style={globalStyles.boldText}>Descripción:</Text> {player.descripcion}</Text>
             <View style={globalStyles.buttonContainer}>
                 <Icon.Button 
                   name="video" 

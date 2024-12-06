@@ -1,13 +1,14 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { TouchableOpacity, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import PlayersListScreen from '../screens/PlayersListScreen';
 import CreatePlayerScreen from '../screens/CreatePlayerScreen';
 import DetailPlayerScreen from '../screens/DetailPlayerScreen';
 import EditPlayerScreen from '../screens/EditPlayerScreen';
 import MediaScreen from '../screens/MediaScreen';
-import { Player } from '../models/Player';
+// No relacionadas con Navigation
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
-import { useNavigation } from '@react-navigation/native';
+import { Player } from '../models/Player';
 
 export type RootStackParams = {
     List: { newPlayer?: Player};
@@ -28,15 +29,15 @@ export const StackNavigator = () => {
         headerShown: true,
         headerStyle: {
             elevation: 10,
-            shadowColor: '#e65c00',
-            backgroundColor: '#f8f9fa' // Color de fondo del título
+            shadowColor: '#e65c00', // Color sombra
+            backgroundColor: '#f8f9fa' // Color fondo
         },
-        headerTintColor: '#1565C0', // Color del texto y los íconos
+        headerTintColor: '#1565C0', // Color titulos/íconos
         headerTitleStyle: {
-          fontWeight: 'bold', // Estilo del texto del título
+          fontWeight: 'bold', 
         },
-        headerTitleAlign: 'center',
-        headerTransparent: false,
+        headerTitleAlign: 'center', // Alineación del título
+        headerTransparent: false, // Fondo transparente
         headerRight: () => (
           <TouchableOpacity 
             onPress={ () => navigation.navigate('List' as never) }

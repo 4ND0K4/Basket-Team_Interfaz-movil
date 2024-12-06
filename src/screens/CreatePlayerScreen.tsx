@@ -121,9 +121,10 @@ const CreatePlayerScreen = () => {
       />
       <TextInput
         placeholder="Descripción"
-        style={globalStyles.formInput}
+        style={[globalStyles.formInput, { height: 100 }]} 
         value={descripcion}
-        numberOfLines={4}
+        multiline={true} 
+        numberOfLines={4} 
         onChangeText={text => setDescripcion(text)}
       />
         <View style={globalStyles.buttonContainer}>
