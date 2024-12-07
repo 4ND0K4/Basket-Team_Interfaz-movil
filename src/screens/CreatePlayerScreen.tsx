@@ -47,6 +47,16 @@ const CreatePlayerScreen = () => {
 
   // Función de envío de formulario
   const handleSubmit = async () => {
+    if (parseInt(edad) < 18 || parseInt(edad) > 64) {
+      Alert.alert('La edad debe estar entre 18 y 64 años');
+      return;
+    }
+
+    if (parseInt(num) < 0 || parseInt(num) > 99) {
+      Alert.alert('El número debe estar entre 0 y 99');
+      return;
+    }
+
     const player: Player = {
       id: '',
       nombre,

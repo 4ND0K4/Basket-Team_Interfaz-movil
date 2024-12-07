@@ -1,9 +1,12 @@
 import { Text } from 'react-native';
-import { globalStyles } from '../../styles/theme/global.styles';
+import LinearGradient from 'react-native-linear-gradient';
+// Navigation
 import { useNavigation, StackActions } from '@react-navigation/native';
 import { CommonActions } from '@react-navigation/native';
-import LinearGradient from 'react-native-linear-gradient';
+// Styles
+import { globalStyles } from '../../styles/theme/global.styles';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+
 export const Navbar = () => {
     const navigator = useNavigation();
 
@@ -22,8 +25,7 @@ export const Navbar = () => {
                         routes: [{ name: 'List' }],
                       })
                     )
-                  }
-                  
+                  }                 
                 style={globalStyles.navBarTitle}>
                 <Icon name="basketball" size={18} color="#e65c00"></Icon> Movicoders Basket Team
             </Text>

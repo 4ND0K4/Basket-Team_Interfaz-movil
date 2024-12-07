@@ -81,6 +81,16 @@ export const EditPlayerScreen: React.FC = () => {
   const handleSubmit = async () => {
     if (!player) return;
 
+    if (parseInt(edad) < 18 || parseInt(edad) > 64) {
+      Alert.alert('La edad debe estar entre 18 y 64 años');
+      return;
+    }
+
+    if (parseInt(num) < 0 || parseInt(num) > 99) {
+      Alert.alert('El número debe estar entre 0 y 99');
+      return;
+    }
+
     setSaving(true);
     try {
       const updatedPlayer: Player = {
@@ -95,14 +105,14 @@ export const EditPlayerScreen: React.FC = () => {
         video: videoFile?.uri || player.video,
       };
       await updatePlayer(player.id, updatedPlayer, imageFile, videoFile);
-      Alert.alert('Player updated successfully');
+      Alert.alert('Jugador actualizado correctamente');
       navigation.reset({
         index: 0,
         routes: [{ name: 'Detail', params: { player: updatedPlayer } }],
       });
     } catch (error) {
-      console.error('Error updating player:', error);
-      Alert.alert('Error updating player');
+      console.error('Error al actualizar el jugador:', error);
+      Alert.alert('Error al actualizar el jugador');
     } finally {
       setSaving(false);
     }
@@ -119,7 +129,7 @@ export const EditPlayerScreen: React.FC = () => {
   if (!player) {
     return (
       <View style={globalStyles.centerContainer}>
-        <Text style={globalStyles.title}>Player not found</Text>
+        <Text style={globalStyles.title}>Jugador no encontrado</Text>
       </View>
     );
   }

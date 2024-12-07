@@ -80,5 +80,5 @@ export const updatePlayer = async (
 
 // Eliminar un jugador por ID
 export const deletePlayer = async (id: string): Promise<void> => {
-  await database().ref(`${dbPath}/${id}`).remove(); // Elimina el jugador de la base de datos
+  await database().ref(`${dbPath}/${id}`).remove(); 
 };

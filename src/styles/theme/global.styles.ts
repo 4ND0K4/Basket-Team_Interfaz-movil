@@ -124,9 +124,9 @@ export const globalStyles = StyleSheet.create({
     },
     // Estilos para el navbar
     navBarContainer: {
-        height: 50, // Altura del navbar, ajusta según necesites
-        justifyContent: 'center', // Centra el texto verticalmente
-        alignItems: 'center', // Centra el texto horizontalmente 
+        height: 50, 
+        justifyContent: 'center', 
+        alignItems: 'center', 
     },
     navBarTitle: {
         fontSize: 18,

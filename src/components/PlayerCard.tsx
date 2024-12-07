@@ -1,26 +1,33 @@
 import React from 'react';
-import { View, Text, Button, Image } from 'react-native';
-import { Player } from '../models/Player';
+import { View, Text, Image, Alert } from 'react-native';
+// Navigator
 import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import { RootStackParams } from '../routes/StackNavigator';
-import { globalStyles } from '../styles/theme/global.styles';
+// Models & Services
+import { Player } from '../models/Player';
 import { deletePlayer } from '../services/playerService';
+// Styles
+import { globalStyles } from '../styles/theme/global.styles';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
+// Propiedades del componente
 type PlayerCardProps = {
   player: Player;
   onDelete: (id: string) => void;
 };
 
 const PlayerCard: React.FC<PlayerCardProps> = ({ player, onDelete }) => {
+  // Hook de navegación
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
+  // Función para eliminar un jugador
   const handleDelete = async () => {
     try {
       await deletePlayer(player.id);
       onDelete(player.id);
     } catch (error) {
-      console.error('Error deleting player:', error);
+      console.error('Error al eliminar el jugador:', error);
+      Alert.alert('Error al eliminar el jugador');
     }
   };
 

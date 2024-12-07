@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TextInput } from 'react-native';
+import { View, Text, FlatList, TextInput, Alert } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { globalStyles } from '../styles/theme/global.styles';
-import { getPlayers } from '../services/playerService';
-import PlayerCard from '../components/PlayerCard';
-import { Player } from '../models/Player';
+// Navigation
 import { useNavigation, useRoute, type NavigationProp, RouteProp } from '@react-navigation/native';
 import { type RootStackParams } from '../routes/StackNavigator';
+// Components
+import PlayerCard from '../components/PlayerCard';
 import CreationButton from '../components/shared/CreationButton';
-import { Picker } from '@react-native-picker/picker';
+// Models & Services
+import { Player } from '../models/Player';
+import { getPlayers } from '../services/playerService';
 
 
 // Definición de los parámetros de la navegación
@@ -28,7 +31,6 @@ export const PlayersListScreen = () => {
   // Estados para los filtros
   const [searchText, setSearchText] = useState('');
   const [filterOption, setFilterOption] = useState('nombre');
-  const [positionOption, setPositionOption] = useState('todos');
 
   // Efecto para cargar los jugadores
   useEffect(() => {
@@ -40,7 +42,8 @@ export const PlayersListScreen = () => {
           setLastKey(playersList[playersList.length - 1].id);
         }
       } catch (error) {
-        console.error('Error fetching players:', error);
+        console.error('Error al cargar jugadores:', error);
+        Alert.alert('Error al cargar jugadores');
       } finally {
         setLoading(false);
       }
@@ -70,29 +73,22 @@ export const PlayersListScreen = () => {
         setLastKey(morePlayers[morePlayers.length - 1].id);
       }
     } catch (error) {
-      console.error('Error fetching more players:', error);
+      console.error('Error al cargar más jugadores:', error);
+      Alert.alert('Error al cargar más jugadores');
     } finally {
       setIsFetchingMore(false);
     }
   };
 
   // Función de filtrado
-  const filterPlayers = (items: Player[], searchText: string, filterOption: string, positionOption: string): Player[] => {
+  const filterPlayers = (items: Player[], searchText: string, filterOption: string): Player[] => {
     if (!items) return [];
 
     // Convertimos los parámetros a minúsculas para comparación
     searchText = searchText ? searchText.toLowerCase() : '';
     filterOption = filterOption ? filterOption.toLowerCase() : '';
-    positionOption = positionOption ? positionOption.toLowerCase() : '';
-
+    
     let filteredItems = items;
-
-    // Filtrado por posición (positionOption)
-    if (positionOption && positionOption !== 'todos') {
-      filteredItems = filteredItems.filter((item: Player) => {
-        return item.posicion?.toLowerCase() === positionOption;
-      });
-    }
 
     // Filtrado por búsqueda (searchText) y opción (filterOption)
     if (searchText) {
@@ -113,8 +109,7 @@ export const PlayersListScreen = () => {
     return filteredItems;
   };
 
-  const filteredPlayers = filterPlayers(players, searchText, filterOption, positionOption);
-
+  const filteredPlayers = filterPlayers(players, searchText, filterOption);
 
   // Función para eliminar un jugador
   const handleDeletePlayer = (id: string) => {

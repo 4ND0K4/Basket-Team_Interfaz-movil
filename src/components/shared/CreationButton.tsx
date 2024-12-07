@@ -2,7 +2,7 @@ import { TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../styles/theme/global.styles";
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
-
+// Propiedades del componente
 interface Props {
     onPress: () => void;
     label: string;
