@@ -9,17 +9,12 @@ const dbPath = '/players';
 export const getPlayers = async (lastKey: string | null = null, limit: number = 10): Promise<Player[]> => {
   let query = database().ref(dbPath).orderByKey().limitToFirst(limit);
   if (lastKey) {
-    query = database().ref(dbPath).orderByKey().startAt(lastKey).limitToFirst(limit + 1);
+    query = database().ref(dbPath).orderByKey().startAt(lastKey).limitToFirst(limit);
   }
 
   const snapshot = await query.once('value');
   const players: Player[] = [];
-  let isFirst = true;
   snapshot.forEach(childSnapshot => {
-    if (isFirst && lastKey) {
-      isFirst = false;
-      return true;
-    }
     const player = childSnapshot.val();
     player.id = childSnapshot.key;
     players.push(player);

@@ -45,7 +45,7 @@ export const PlayersListScreen = () => {
   // Efecto para añadir un nuevo jugador
   useEffect(() => {
     if (route.params?.newPlayer) {
-      setPlayers(prevPlayers => [route.params.newPlayer, ...prevPlayers]);
+      setPlayers(prevPlayers => [route.params?.newPlayer, ...prevPlayers].filter(player => player !== undefined));
     }
   }, [route.params?.newPlayer]);
 
