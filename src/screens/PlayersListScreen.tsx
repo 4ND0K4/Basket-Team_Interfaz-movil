@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, TextInput } from 'react-native';
 import { globalStyles } from '../styles/theme/global.styles';
 import { getPlayers } from '../services/playerService';
 import PlayerCard from '../components/PlayerCard';
@@ -7,6 +7,8 @@ import { Player } from '../models/Player';
 import { useNavigation, useRoute, type NavigationProp, RouteProp } from '@react-navigation/native';
 import { type RootStackParams } from '../routes/StackNavigator';
 import CreationButton from '../components/shared/CreationButton';
+import { Picker } from '@react-native-picker/picker';
+
 
 // Definición de los parámetros de la navegación
 type PlayersListScreenRouteProp = RouteProp<RootStackParams, 'List'>;
@@ -22,6 +24,11 @@ export const PlayersListScreen = () => {
   const [loading, setLoading] = useState(true);
   const [lastKey, setLastKey] = useState<string | null>(null);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
+
+  // Estados para los filtros
+  const [searchText, setSearchText] = useState('');
+  const [filterOption, setFilterOption] = useState('nombre');
+  const [positionOption, setPositionOption] = useState('todos');
 
   // Efecto para cargar los jugadores
   useEffect(() => {
@@ -69,6 +76,46 @@ export const PlayersListScreen = () => {
     }
   };
 
+  // Función de filtrado
+  const filterPlayers = (items: Player[], searchText: string, filterOption: string, positionOption: string): Player[] => {
+    if (!items) return [];
+
+    // Convertimos los parámetros a minúsculas para comparación
+    searchText = searchText ? searchText.toLowerCase() : '';
+    filterOption = filterOption ? filterOption.toLowerCase() : '';
+    positionOption = positionOption ? positionOption.toLowerCase() : '';
+
+    let filteredItems = items;
+
+    // Filtrado por posición (positionOption)
+    if (positionOption && positionOption !== 'todos') {
+      filteredItems = filteredItems.filter((item: Player) => {
+        return item.posicion?.toLowerCase() === positionOption;
+      });
+    }
+
+    // Filtrado por búsqueda (searchText) y opción (filterOption)
+    if (searchText) {
+      filteredItems = filteredItems.filter((item: Player) => {
+        if (filterOption === 'nombre') {
+          return item.nombre?.toLowerCase().includes(searchText);
+        } else if (filterOption === 'posicion') {
+          return item.posicion?.toLowerCase().includes(searchText);
+        } else if (filterOption === 'edad') {
+          return item.edad?.toString().includes(searchText);
+        } else {
+          // Si la opción no coincide, filtramos por nombre por defecto
+          return item.nombre?.toLowerCase().includes(searchText);
+        }
+      });
+    }
+
+    return filteredItems;
+  };
+
+  const filteredPlayers = filterPlayers(players, searchText, filterOption, positionOption);
+
+
   // Función para eliminar un jugador
   const handleDeletePlayer = (id: string) => {
     setPlayers(prevPlayers => prevPlayers.filter(player => player.id !== id));
@@ -90,9 +137,25 @@ export const PlayersListScreen = () => {
 
   return (
     <View style={globalStyles.centerContainer}>
-      {/*<Text style={globalStyles.title}>Lista de jugadores</Text>*/}
+      <View style={globalStyles.searchContainer}>
+        <TextInput
+          placeholder="Buscar..."
+          style={globalStyles.searchInput}
+          value={searchText}
+          onChangeText={text => setSearchText(text)}
+        />
+        <Picker
+          selectedValue={filterOption}
+          style={globalStyles.searchInput}
+          onValueChange={(itemValue) => setFilterOption(itemValue)}
+        >
+          <Picker.Item label="Nombre" value="nombre" />
+          <Picker.Item label="Posición" value="posicion" />
+          <Picker.Item label="Edad" value="edad" />
+        </Picker>
+      </View>
       <FlatList
-        data={players}
+        data={filteredPlayers}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <PlayerCard player={item} onDelete={handleDeletePlayer} />}
         ItemSeparatorComponent={renderSeparator}
@@ -103,5 +166,4 @@ export const PlayersListScreen = () => {
     </View>
   );
 };
-
 export default PlayersListScreen;

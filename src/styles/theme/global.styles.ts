@@ -157,6 +157,20 @@ export const globalStyles = StyleSheet.create({
         resizeMode: 'cover',
     },
     // Estilos para la pantalla de PlayerListScreen
+    searchContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 10,
+      },
+      searchInput: {
+        flex: 1,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 10,
+        marginVertical: 10,
+        borderRadius: 5,
+      },
     separator: {
         height: 5,
         width: '100%',
