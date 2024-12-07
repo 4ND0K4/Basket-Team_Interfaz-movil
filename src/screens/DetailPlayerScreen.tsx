@@ -1,30 +1,36 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet, Image, Modal, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, Image, Modal, TouchableOpacity } from 'react-native';
+import ImageViewer from 'react-native-image-zoom-viewer';
+// Navigation
 import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import { type RootStackParams } from '../routes/StackNavigator';
-import NavigationButton from '../components/shared/NavigationButton';
-import { Player } from '../models/Player';
-import { useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { RouteProp } from '@react-navigation/native';
+// Styles
 import { globalStyles } from '../styles/theme/global.styles';
 import Icon from 'react-native-vector-icons/FontAwesome6';
-import ImageViewer from 'react-native-image-zoom-viewer';
 
+// Definición de los parámetros de la navegación
 type DetailPlayerScreenRouteProp = RouteProp<RootStackParams, 'Detail'>;
 
 export const DetailPlayerScreen: React.FC = () => {
+    // Hook de navegación
     const navigation = useNavigation<NavigationProp<RootStackParams>>();
+    // Hook de ruta
     const route = useRoute<DetailPlayerScreenRouteProp>();
+    // Parámetros de la ruta
     const { player } = route.params;
+    // Estado del modal
     const [isModalVisible, setIsModalVisible] = useState(false);
 
+    // Cambio del título de la pantalla
     useEffect(() => {
         navigation.setOptions({
           title: player.nombre,
         });
     }, [player]);
 
+    // Array de imagen para el visor
     const images = [
         {
             url: player.img,
@@ -53,11 +59,6 @@ export const DetailPlayerScreen: React.FC = () => {
                   onPress={() => navigation.navigate('Edit', { playerId: player.id })} 
                 >Editar</Icon.Button>
             </View>
-            {/* Botón de navegación a List. Componente sustituido por House */}
-            {/*<NavigationButton 
-                onPress={ () => navigation.navigate('List' as never) }
-                label="Volver"
-            />*/}
             <Modal visible={isModalVisible} transparent={true}>
                 <ImageViewer imageUrls={images} onClick={() => setIsModalVisible(false)} />
             </Modal>

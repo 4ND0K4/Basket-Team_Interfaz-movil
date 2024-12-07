@@ -12,13 +12,18 @@ import Icon from 'react-native-vector-icons/FontAwesome6';
 import { Player } from '../models/Player';
 import { updatePlayer, getPlayerById } from '../services/playerService';
 
+// Definición de los parámetros de la navegación
 type EditPlayerScreenRouteProp = RouteProp<RootStackParams, 'Edit'>;
 
 export const EditPlayerScreen: React.FC = () => {
+  // Hook de navegación
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  // Hook de ruta
   const route = useRoute<EditPlayerScreenRouteProp>();
+  // Parámetros de la ruta
   const { playerId } = route.params;
 
+  // Estados
   const [loading, setLoading] = useState(false);
 
   const [player, setPlayer] = useState<Player | null>(null);
@@ -31,6 +36,7 @@ export const EditPlayerScreen: React.FC = () => {
   const [imageFile, setImageFile] = useState<any>(null);
   const [videoFile, setVideoFile] = useState<any>(null);
 
+  // Efecto para cargar el jugador
   useEffect(() => {
     const fetchPlayer = async () => {
       const fetchedPlayer = await getPlayerById(playerId);
@@ -48,6 +54,7 @@ export const EditPlayerScreen: React.FC = () => {
     fetchPlayer();
   }, [playerId]);
 
+  // Función de carga de imagen
   const handleChooseImage = () => {
     ImagePicker.launchImageLibrary({ mediaType: 'photo' }, response => {
       if (response.assets && response.assets.length > 0) {
@@ -56,6 +63,7 @@ export const EditPlayerScreen: React.FC = () => {
     });
   };
 
+  // Función de carga de video
   const handleChooseVideo = () => {
     ImagePicker.launchImageLibrary({ mediaType: 'video' }, response => {
       if (response.assets && response.assets.length > 0) {
@@ -64,6 +72,7 @@ export const EditPlayerScreen: React.FC = () => {
     });
   };
 
+  // Función de envío de formulario
   const handleSubmit = async () => {
     if (!player) return;
   
@@ -102,7 +111,7 @@ export const EditPlayerScreen: React.FC = () => {
 
   return (
     <View style={globalStyles.form}>
-      <Text style={globalStyles.label}>Nombre:</Text>
+      {/*<Text style={globalStyles.label}>Nombre:</Text>*/}
       <TextInput
         autoCapitalize='words'
         placeholder="Nombre"
@@ -110,7 +119,40 @@ export const EditPlayerScreen: React.FC = () => {
         value={nombre}
         onChangeText={text => setNombre(text)}
       />
-      <Text style={globalStyles.label}>Posición:</Text>
+      {/*<Text style={globalStyles.label}>Número:</Text>*/}
+      <TextInput
+        placeholder="Numero"
+        style={globalStyles.formInput}
+        keyboardType="numeric"
+        value={num}
+        onChangeText={text => setNum(text)}
+      />
+      {/*<Text style={globalStyles.label}>Edad:</Text>*/}
+      <TextInput
+        placeholder="Edad"
+        style={globalStyles.formInput}
+        keyboardType="numeric"
+        value={edad}
+        onChangeText={text => setEdad(text)}
+      />
+      {/*<Text style={globalStyles.label}>Anillos:</Text>*/}
+      <TextInput
+        placeholder="Anillos"
+        style={globalStyles.formInput}
+        keyboardType="numeric"
+        value={anillos}
+        onChangeText={text => setAnillos(text)}
+      />
+      {/*<Text style={globalStyles.label}>Descripción:</Text>*/}
+      <TextInput
+        placeholder="Descripcion"
+        style={[globalStyles.formInput, { height: 100 }]} 
+        multiline={true}
+        numberOfLines={4}
+        value={descripcion}
+        onChangeText={text => setDescripcion(text)}
+      />
+      {/*<Text style={globalStyles.label}>Posición:</Text>*/}
       <Picker
         selectedValue={posicion}
         style={globalStyles.pickerInput}
@@ -122,39 +164,6 @@ export const EditPlayerScreen: React.FC = () => {
         <Picker.Item label="Ala-Pivot" value="Ala-Pivot" />
         <Picker.Item label="Pivot" value="Pivot" />
       </Picker>
-      <Text style={globalStyles.label}>Número:</Text>
-      <TextInput
-        placeholder="Numero"
-        style={globalStyles.formInput}
-        keyboardType="numeric"
-        value={num}
-        onChangeText={text => setNum(text)}
-      />
-      <Text style={globalStyles.label}>Edad:</Text>
-      <TextInput
-        placeholder="Edad"
-        style={globalStyles.formInput}
-        keyboardType="numeric"
-        value={edad}
-        onChangeText={text => setEdad(text)}
-      />
-      <Text style={globalStyles.label}>Anillos:</Text>
-      <TextInput
-        placeholder="Anillos"
-        style={globalStyles.formInput}
-        keyboardType="numeric"
-        value={anillos}
-        onChangeText={text => setAnillos(text)}
-      />
-      <Text style={globalStyles.label}>Descripción:</Text>
-      <TextInput
-        placeholder="Descripcion"
-        style={[globalStyles.formInput, { height: 100 }]}
-        multiline={true}
-        numberOfLines={4}
-        value={descripcion}
-        onChangeText={text => setDescripcion(text)}
-      />
         <View style={globalStyles.buttonContainer}>
           <Icon.Button 
             name="image" 

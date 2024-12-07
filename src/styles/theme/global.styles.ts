@@ -79,7 +79,7 @@ export const globalStyles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
         color: 'black',
-        marginVertical: 5,
+        marginVertical: 1,
     },
     // Estilo para los botones
     creationButton: {

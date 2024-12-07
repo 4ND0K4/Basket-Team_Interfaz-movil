@@ -10,6 +10,7 @@ import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import { Player } from '../models/Player';
 
+// Definición de los parámetros de la navegación
 export type RootStackParams = {
     List: { newPlayer?: Player};
     Create: undefined;
@@ -18,6 +19,7 @@ export type RootStackParams = {
     Media: { videoUrl: string };
 }
 
+// Creación del Stack
 const Stack = createStackNavigator<RootStackParams>();
 
 export const StackNavigator = () => {
@@ -26,15 +28,15 @@ export const StackNavigator = () => {
   
   return (
     <Stack.Navigator screenOptions={{
-        headerShown: true,
+        headerShown: true, //Muestra encabezado
         headerStyle: {
-            elevation: 10,
+            elevation: 10, // Sombra en Android
             shadowColor: '#e65c00', // Color sombra
             backgroundColor: '#f8f9fa' // Color fondo
         },
         headerTintColor: '#1565C0', // Color titulos/íconos
         headerTitleStyle: {
-          fontWeight: 'bold', 
+          fontWeight: 'bold', // Peso del título
         },
         headerTitleAlign: 'center', // Alineación del título
         headerTransparent: false, // Fondo transparente
@@ -46,7 +48,7 @@ export const StackNavigator = () => {
             <Icon name="house" size={20} color="#1565C0" />
           </TouchableOpacity>
         ),
-    gestureEnabled: true,
+        gestureEnabled: true, // Habilita gestos
     }}>
       <Stack.Screen name="List" component={PlayersListScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Create" component={CreatePlayerScreen} />

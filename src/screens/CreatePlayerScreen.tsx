@@ -13,9 +13,9 @@ import { Player } from '../models/Player';
 import { addPlayer } from '../services/playerService';
 
 const CreatePlayerScreen = () => {
-
+  // Hook de navegación
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
-  
+  // Estados
   const [loading, setLoading] = useState(false);
 
   const [nombre, setNombre] = useState('');
@@ -27,6 +27,7 @@ const CreatePlayerScreen = () => {
   const [imageFile, setImageFile] = useState<any>(null);
   const [videoFile, setVideoFile] = useState<any>(null);
 
+  // Función de carga de imagen
   const handleChooseImage = () => {
     ImagePicker.launchImageLibrary({ mediaType: 'photo' }, response => {
       if (response.assets && response.assets.length > 0) {
@@ -35,6 +36,7 @@ const CreatePlayerScreen = () => {
     });
   };
 
+  // Función de carga de video
   const handleChooseVideo = () => {
     ImagePicker.launchImageLibrary({ mediaType: 'video' }, response => {
       if (response.assets && response.assets.length > 0) {
@@ -43,6 +45,7 @@ const CreatePlayerScreen = () => {
     });
   };
 
+  // Función de envío de formulario
   const handleSubmit = async () => {
     const player: Player = {
       id: '',
@@ -87,17 +90,6 @@ const CreatePlayerScreen = () => {
         value={nombre}
         onChangeText={text => setNombre(text)}
       />
-      <Picker
-        selectedValue={posicion}
-        style={globalStyles.pickerInput}
-        onValueChange={(posicion) => setPosicion(posicion)}
-      >
-        <Picker.Item label="Base" value="Base" />
-        <Picker.Item label="Escolta" value="Escolta" />
-        <Picker.Item label="Alero" value="Alero" />
-        <Picker.Item label="Ala-Pivot" value="Ala-Pivot" />
-        <Picker.Item label="Pivot" value="Pivot" />
-      </Picker>
       <TextInput
         placeholder="Número"
         style={globalStyles.formInput}
@@ -127,6 +119,17 @@ const CreatePlayerScreen = () => {
         numberOfLines={4} 
         onChangeText={text => setDescripcion(text)}
       />
+      <Picker
+        selectedValue={posicion}
+        style={globalStyles.pickerInput}
+        onValueChange={(posicion) => setPosicion(posicion)}
+      >
+        <Picker.Item label="Base" value="Base" />
+        <Picker.Item label="Escolta" value="Escolta" />
+        <Picker.Item label="Alero" value="Alero" />
+        <Picker.Item label="Ala-Pivot" value="Ala-Pivot" />
+        <Picker.Item label="Pivot" value="Pivot" />
+      </Picker>
         <View style={globalStyles.buttonContainer}>
         <Icon.Button 
             name="image" 

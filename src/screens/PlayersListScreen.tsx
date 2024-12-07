@@ -8,17 +8,22 @@ import { useNavigation, useRoute, type NavigationProp, RouteProp } from '@react-
 import { type RootStackParams } from '../routes/StackNavigator';
 import CreationButton from '../components/shared/CreationButton';
 
+// Definición de los parámetros de la navegación
 type PlayersListScreenRouteProp = RouteProp<RootStackParams, 'List'>;
 
 export const PlayersListScreen = () => {
+  // Hook de naveg
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  // Hook de ruta
   const route = useRoute<PlayersListScreenRouteProp>();
 
+  // Estados
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
   const [lastKey, setLastKey] = useState<string | null>(null);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 
+  // Efecto para cargar los jugadores
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
@@ -37,12 +42,14 @@ export const PlayersListScreen = () => {
     fetchPlayers();
   }, []);
 
+  // Efecto para añadir un nuevo jugador
   useEffect(() => {
     if (route.params?.newPlayer) {
       setPlayers(prevPlayers => [route.params.newPlayer, ...prevPlayers]);
     }
   }, [route.params?.newPlayer]);
 
+  // Función para cargar más jugadores
   const fetchMorePlayers = async () => {
     if (isFetchingMore || !lastKey) return;
     setIsFetchingMore(true);
@@ -62,14 +69,17 @@ export const PlayersListScreen = () => {
     }
   };
 
+  // Función para eliminar un jugador
   const handleDeletePlayer = (id: string) => {
     setPlayers(prevPlayers => prevPlayers.filter(player => player.id !== id));
   };
 
+  // Función para renderizar el separador de la FlatList
   const renderSeparator = () => {
     return <View style={globalStyles.separator} />;
   };
 
+  // Renderizado condicional
   if (loading) {
     return (
       <View style={globalStyles.centerContainer}>

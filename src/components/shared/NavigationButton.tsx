@@ -18,3 +18,9 @@ export const NavigationButton = ({ onPress, label }: Props) => {
 };
 
 export default NavigationButton;
+
+{/* Botón de navegación a List. Componente sustituido por House */}
+            {/*<NavigationButton 
+                onPress={ () => navigation.navigate('List' as never) }
+                label="Volver"
+            />*/}
