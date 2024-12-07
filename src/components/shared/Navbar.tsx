@@ -1,6 +1,7 @@
 import { Text } from 'react-native';
 import { globalStyles } from '../../styles/theme/global.styles';
 import { useNavigation, StackActions } from '@react-navigation/native';
+import { CommonActions } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 export const Navbar = () => {
@@ -14,7 +15,15 @@ export const Navbar = () => {
             end={{ x: 1, y: 0 }}
         >
             <Text 
-                onPress={() => navigator.dispatch(StackActions.popToTop())}
+                onPress={() =>
+                    navigator.dispatch(
+                      CommonActions.reset({
+                        index: 0,
+                        routes: [{ name: 'List' }],
+                      })
+                    )
+                  }
+                  
                 style={globalStyles.navBarTitle}>
                 <Icon name="basketball" size={18} color="#e65c00"></Icon> Movicoders Basket Team
             </Text>
