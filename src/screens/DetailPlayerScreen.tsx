@@ -19,7 +19,9 @@ export const DetailPlayerScreen: React.FC = () => {
     // Hook de ruta
     const route = useRoute<DetailPlayerScreenRouteProp>();
     // Parámetros de la ruta
-    const { player } = route.params;
+    const { player: initialPlayer } = route.params;
+
+    const [player, setPlayer] = useState(initialPlayer);
     // Estado del modal
     const [isModalVisible, setIsModalVisible] = useState(false);
 
