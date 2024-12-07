@@ -161,14 +161,14 @@ export const globalStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: 5, 
       },
       searchInput: {
         flex: 1,
         borderWidth: 1,
         borderColor: '#ccc',
-        padding: 10,
-        marginVertical: 10,
+        padding: 5,
+        marginVertical: 5,
         borderRadius: 5,
       },
     separator: {

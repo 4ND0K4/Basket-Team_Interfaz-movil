@@ -92,7 +92,10 @@ export const EditPlayerScreen: React.FC = () => {
       // Llamamos a la función updatePlayer pasándole los archivos de imagen y video si existen
       await updatePlayer(player.id, updatedPlayer, imageFile, videoFile);
       Alert.alert('Player updated successfully!');
-      navigation.navigate('Detail', { player: updatedPlayer });
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Detail', params: { player } }],
+      });
     } catch (error) {
       console.error('Error al actualizar el jugador:', error);
       Alert.alert('Error al actualizar el jugador.');
